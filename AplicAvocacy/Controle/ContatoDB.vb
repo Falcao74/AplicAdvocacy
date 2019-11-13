@@ -80,19 +80,11 @@ Public Class ContatoDB
         End Try
     End Sub
 
-    Public Function Listar(filtroNome As String) ' Esta função recebe o nome como filtro para a lista, caso seja necessário
+    Public Function Listar() ' Esta função recebe o nome como filtro para a lista, caso seja necessário
         Dim listaContato As New List(Of Contato)
-        Dim vSQL As StringBuilder
         Dim dataReader As SqlDataReader
 
-        vSQL = New StringBuilder("SELECT * FROM Adv_Contatos")
-
-        If Not (String.IsNullOrEmpty(filtroNome)) Then ' se a string filtro nome não estiver vazia ou nula
-
-            vSQL.Append(" WHERE Cadastro LIKE '" & filtroNome & "';")
-        End If
-
-        comando = New SqlCommand(Convert.ToString(vSQL), conexao)
+        comando = New SqlCommand("SELECT * FROM Adv_Contatos", conexao)
         Try
 
             conexao.Open()
@@ -101,7 +93,7 @@ Public Class ContatoDB
             If (dataReader.HasRows) Then
                 While (dataReader.Read())
                     listaContato.Add(New Contato(
-                             Integer.Parse(dataReader("id_Contato")),
+                             CInt(dataReader("id_Contato")),
                              Convert.ToString(dataReader("Contato")),
                              Convert.ToString(dataReader("CNPJ")),
                              Convert.ToString(dataReader("Fone1")),

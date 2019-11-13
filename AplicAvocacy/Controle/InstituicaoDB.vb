@@ -77,12 +77,16 @@ Public Class InstituicaoDB
         End Try
     End Sub
 
-    Public Function Listar()
+    Public Function Listar(filtro As String)
         Dim listaInstituicao As New List(Of Instituicao)
         Dim dataReader As SqlDataReader
 
+        If (filtro = "") Then
+            comando = New SqlCommand("SELECT * From Adv_Instituicoes", conexao)
+        Else
+            comando = New SqlCommand("SELECT * FROM Adv_Instituicoes WHERE NomeInstit LIKE '%" & filtro.ToString() & "%'", conexao)
+        End If
 
-        comando = New SqlCommand("SELECT * From Adv_Instituicoes", conexao)
         Try
             conexao.Open()
             dataReader = comando.ExecuteReader()
