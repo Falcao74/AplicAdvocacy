@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 
 Public Class ConexaoBanco
 
-    Public conexao = "SERVER=ppiserver.database.windows.net;DATABASE=Advocacy;Uid=aldeias;Pwd=r8Dg[9I#B{pP0V5x3v4"
+    Public conexao = "SERVER={YOUR_SERVER};DATABASE=Advocacy;Uid={YOUR_USER};Pwd={YOUR_PASSWORD}"
     Public SQLConection As New SqlConnection With {.ConnectionString = conexao}
     Public SQLCommand As New SqlCommand
 
